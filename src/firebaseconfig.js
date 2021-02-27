@@ -1,3 +1,6 @@
+import firebase from 'firebase'
+import 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: "AIzaSyAEhoCWssNX2LxiimC_jNlL-AlFwL16SfA",
   authDomain: "react-app-b75cf.firebaseapp.com",
@@ -10,3 +13,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const fire = firebase.initializeApp(firebaseConfig);
 const analytics = firebase.analytics();
+
+const auth = fire.auth()
+
+export {auth}
