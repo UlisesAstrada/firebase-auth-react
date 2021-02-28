@@ -1,21 +1,26 @@
 import React, { useState } from 'react'
 import {auth} from '../firebaseconfig'
 
-function Login() {
+function Login () {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [msgError, setMsgError] = useState(null)
 
-  const RegistrarUsuario = (event) => {
-    event.preventDefault()
-    try {
-      auth.createUserWithEmailAndPassword(email, password)
-    } catch (error) {
-      console.error(error);
+  const RegistrarUsuario = (e) => {
+    e.preventDefault()
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(res => alert('Usuario registrado'))
+      .catch (e => {
+        if(e.code == 'auth/invalid-email') {
+          setMsgError('Verifique que el email sea correcto')
+        }
+        if(e.code == 'auth/weak-password') {
+          setMsgError('La contraseña debe tener al menos 6 caracteres')
+        }
+      })
     }
-  }
-
-  return (
+  return (  
     <div className="row mt-5">
       <div className="col"></div>
       <div className="col">
@@ -35,6 +40,9 @@ function Login() {
             type="submit" 
             value="Registrar usuario"/>
         </form>
+        {
+          msgError !== null ? (<div className="alert alert-danger" role="alert">{msgError}</div>) : (<span></span>)
+        }
       </div>
       <div className="col"></div>
     </div>
