@@ -11,11 +11,11 @@ function Login () {
     e.preventDefault()
     auth.createUserWithEmailAndPassword(email, password)
       .then(res => alert('Usuario registrado'))
-      .catch (e => {
-        if(e.code === 'auth/invalid-email') {
+      .catch (err => {
+        if(err.code === 'auth/invalid-email') {
           setMsgError('Verifique que el email sea correcto')
         }
-        if(e.code === 'auth/weak-password') {
+        if(err.code === 'auth/weak-password') {
           setMsgError('La contraseña debe tener al menos 6 caracteres')
         }
       })
@@ -24,7 +24,14 @@ function Login () {
   const LoginUsuario = () => {
     auth.signInWithEmailAndPassword(email, password)
       .then(res => console.log(res))
-      .catch(err => console.error(err))
+      .catch(err => {
+        if(err.code === 'auth/wrong-password') {
+          setMsgError('Contraseña incorrecta')
+        }
+        if(err.code === 'auth/user-not-found') {
+          setMsgError('Email incorrecto')
+        }
+      })
   }
 
   return (  
