@@ -1,8 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Admin from './Admin'
-import Login from './Login'
-import Inicio from './Inicio'
 
 function Menu() {
   return (
@@ -16,7 +13,7 @@ function Menu() {
             <Link className="nav-link" to="/admin">Admin</Link>
           </li>
           <li>
-            <Link className="nav-link" to="/login">Login</Link>
+            <Link className="nav-link" to="/login">Iniciar sesión</Link>
           </li>
         </ul>
       </nav>
