@@ -11,15 +11,29 @@ function Login () {
     e.preventDefault()
     auth.createUserWithEmailAndPassword(email, password)
       .then(res => alert('Usuario registrado'))
-      .catch (e => {
-        if(e.code === 'auth/invalid-email') {
+      .catch (err => {
+        if(err.code === 'auth/invalid-email') {
           setMsgError('Verifique que el email sea correcto')
         }
-        if(e.code === 'auth/weak-password') {
+        if(err.code === 'auth/weak-password') {
           setMsgError('La contraseña debe tener al menos 6 caracteres')
         }
       })
     }
+
+  const LoginUsuario = () => {
+    auth.signInWithEmailAndPassword(email, password)
+      .then(res => console.log(res))
+      .catch(err => {
+        if(err.code === 'auth/wrong-password') {
+          setMsgError('Contraseña incorrecta')
+        }
+        if(err.code === 'auth/user-not-found') {
+          setMsgError('Email incorrecto')
+        }
+      })
+  }
+
   return (  
     <div className="row mt-5">
       <div className="col"></div>
@@ -36,10 +50,13 @@ function Login () {
             placeholder="Introduce tu contraseña" 
             type="password"/>
           <input 
-            className="btn btn-block mt-3 bg-success text-white rounded"
+            className="btn btn-block mt-3 btn-dark text-white rounded"
             type="submit" 
-            value="Registrar usuario"/>
+            value="Registrarme"/>
         </form>
+        <button
+          onClick={LoginUsuario} 
+          className="btn btn-success btn-block mt-2 text-white rounded">Iniciar sesión</button>
         {
           msgError !== null ? (<div className="alert alert-danger" role="alert">{msgError}</div>) : (<span></span>)
         }
