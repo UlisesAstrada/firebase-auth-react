@@ -12,10 +12,10 @@ function Login () {
     auth.createUserWithEmailAndPassword(email, password)
       .then(res => alert('Usuario registrado'))
       .catch (e => {
-        if(e.code == 'auth/invalid-email') {
+        if(e.code === 'auth/invalid-email') {
           setMsgError('Verifique que el email sea correcto')
         }
-        if(e.code == 'auth/weak-password') {
+        if(e.code === 'auth/weak-password') {
           setMsgError('La contraseña debe tener al menos 6 caracteres')
         }
       })

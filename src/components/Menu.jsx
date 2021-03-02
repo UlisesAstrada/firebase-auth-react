@@ -1,8 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Admin from './Admin'
-import Login from './Login'
-import Inicio from './Inicio'
 
 function Menu() {
   return (
