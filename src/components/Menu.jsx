@@ -5,6 +5,7 @@ import {auth} from '../firebaseconfig'
 
 function Menu() {
 
+  const historial = useHistory()
   const [usuario, setUsuario] = useState(null)
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -17,6 +18,7 @@ function Menu() {
   const CerrarSesion = () => {
     auth.signOut()
     setUsuario(null)
+    historial.push('/login')
   }
 
   return (
