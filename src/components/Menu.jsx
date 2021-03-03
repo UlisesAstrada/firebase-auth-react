@@ -29,20 +29,33 @@ function Menu() {
             <Link className="nav-link" to="/">Inicio</Link>
           </li>
           <li>
-            <Link className="nav-link" to="/admin">Admin</Link>
+          {
+          !usuario ? 
+          <Link className="nav-link" to="/admin">Admin</Link>
+          : 
+          (<span></span>)
+          }
           </li>
           <li>
-            <Link className="nav-link" to="/login">Iniciar sesión</Link>
+          {
+          !usuario ? 
+          <Link className="nav-link" to="/login">Iniciar sesión</Link>
+          : 
+          (<span></span>)
+          }
           </li>
         </ul>
         {
           usuario ? 
-          (<button
-            onClick={CerrarSesion} 
-            className="btn btn-danger">Cerrar sesión</button>) 
+          (
+            <button
+              onClick={CerrarSesion}
+              className='btn btn-danger'
+              >Cerrar Sesión</button>
+          )
           : 
           (<span></span>)
-        }
+          }
       </nav>
     </div>
   )
